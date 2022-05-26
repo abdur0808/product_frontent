@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+
+  color: #bfc1c8;
+  font-family: "Roboto", "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  background: #1e202b;
+}
+.css-qc6sy-singleValue {
+  color: white !important;
+}
+.css-26l3qy-menu {
+  background-color: #1e202bdb !important;
+}
+.css-1n7v3ny-option {
+  background-color: #393a43f7 !important;
+}
+.css-b62m3t-container {
+  display: inline-block;
+  text-align: left;
+}
+input {
+  color: #fff !important;
+}
