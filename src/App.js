@@ -2,7 +2,6 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import styled from "styled-components";
 
-//display icon https://openweathermap.org/img/wn/${icon}.png
 function App() {
   return (
     <Wrap>
