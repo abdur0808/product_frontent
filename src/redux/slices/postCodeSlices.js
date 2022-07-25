@@ -8,8 +8,9 @@ export const fetchPostCodeAction = createAsyncThunk(
   async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
       const { data } = await axios.get(
-        `https://api.postcodes.io/postcodes/${payload}`
+        `https://localhost:5001/product`
       );
+      console.log('reducer ', data);
       return data;
     } catch (error) {
       if (!error?.response) {
@@ -36,6 +37,7 @@ export const fetchPostCodeListAction = createAsyncThunk(
   }
 );
 
+
 //slice
 
 const weatherSlice = createSlice({
@@ -46,8 +48,9 @@ const weatherSlice = createSlice({
     builder.addCase(fetchPostCodeAction.pending, (state, action) => {
       state.loading = true;
     });
-    //fulfilled
+    //fulfilledloading
     builder.addCase(fetchPostCodeAction.fulfilled, (state, action) => {
+      console.log('fulfilled ---- ', action?.payload);
       state.postCodeDetails = action?.payload;
       state.loading = false;
       state.error = false;

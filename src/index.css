@@ -24,3 +24,20 @@ body {
 input {
   color: #fff !important;
 }
+.ui.card>.image, .ui.cards>.card>.image {
+  height: 160px !important;
+    object-fit: contain !important;
+}
+.description {
+  min-height: 100px;
+}
+.ui.card, .ui.cards>.card {
+  width: 100% !important;
+}
+.ui.centered.grid, .ui.centered.grid>.row, .ui.grid>.centered.row {
+  padding: 0 20px;
+}
+.ui.items {
+  margin: 20px !important;
+  padding: 0 0 20px 0;
+}
