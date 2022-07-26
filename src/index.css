@@ -8,36 +8,129 @@ body {
   line-height: 1.5;
   background: #1e202b;
 }
+
 .css-qc6sy-singleValue {
   color: white !important;
 }
+
 .css-26l3qy-menu {
   background-color: #1e202bdb !important;
 }
+
 .css-1n7v3ny-option {
   background-color: #393a43f7 !important;
 }
+
 .css-b62m3t-container {
   display: inline-block;
   text-align: left;
 }
+
 input {
   color: #fff !important;
 }
-.ui.card>.image, .ui.cards>.card>.image {
+
+.ui.card>.image,
+.ui.cards>.card>.image {
   height: 160px !important;
-    object-fit: contain !important;
+  object-fit: contain !important;
 }
+
 .description {
   min-height: 100px;
 }
-.ui.card, .ui.cards>.card {
+
+.ui.card,
+.ui.cards>.card {
   width: 100% !important;
 }
-.ui.centered.grid, .ui.centered.grid>.row, .ui.grid>.centered.row {
+
+.ui.centered.grid,
+.ui.centered.grid>.row,
+.ui.grid>.centered.row {
   padding: 0 20px;
 }
+
 .ui.items {
   margin: 20px !important;
   padding: 0 0 20px 0;
+}
+
+/* CSS For Product Detail Page */
+.product--detail-modal {}
+
+.product--detail-modal.ui.modal>.image.content {
+  display: block !important;
+}
+
+.ui.fullscreen.modal.product--detail-modal {
+  margin: 0 auto;
+  left: auto !important;
+}
+
+.product--detail-wrapper {
+  width: 100%;
+}
+
+.product--image {
+  width: 25%;
+  float: left;
+  border-right: 1px solid #ccc;
+}
+
+.product--description div {}
+
+.product--image img {}
+
+.product--description {
+  width: 75%;
+  float: left;
+  padding: 0 20px;
+}
+
+.product-price,
+.product-variant,
+.product--addTo-cart {
+  padding: 15px 0;
+}
+
+.product--detail-wrapper .product--addTo-cart {
+  width: 40%;
+}
+.header--wrapar {
+  width: 100%;
+  
+}
+.header--wrapar > div {
+  float: left;
+  text-align: center;
+  padding: 15px;
+}
+.product--search{
+  width: calc(100% - 450px);
+}
+.product--search input {
+  border: 1px solid #ccc;
+  color: #000 !important;
+  padding: 10px;
+  float: left;
+  width: 80%
+}
+.product--filter {
+  width: 250px;
+  text-align: right;
+}
+.product--filter label{
+  text-transform: capitalize;
+  font-weight: bold;
+  padding: 0 10px 0px 0;
+}
+.product--filter .dropdown  {
+  border: 1px solid #ccc;
+}
+.product--cart {
+  width: 200px;
+}
+.ui.horizontal.divider {
+width: 100%
 }

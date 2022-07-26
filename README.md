@@ -2,6 +2,46 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## 
+Open the .Net core WebApi application
+
+Build the Application & resolve the conflict if any.
+
+## Open Package Manager Console
+
+Make sure you have selected the project 'Project.DB'
+
+And paste the below cmd in PM>
+
+## PM> ADD-MIGRATION initials4
+
+Build started...
+Build succeeded.
+To undo this action, use Remove-Migration.
+
+And then run the below cmd-
+
+## PM> UPDATE-DATABASE
+
+Build started...
+Build succeeded.
+Applying migration 'xxxxxxxx_initials4'.
+Done.
+
+## *****
+Open the application
+Goto folder name: product_app
+Type cmd if you are in the folder not in >  
+## cd product_app  
+enter
+
+Make sure the localhost/port # is same as the .netcore webappi.
+If mismatch then goto the file name 'productSlices' and update.
+fallow the below instruction
+
+### `npm install`
+
 ## Available Scripts
 
 For install all dependencies
@@ -10,7 +50,7 @@ For install all dependencies
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -44,22 +84,30 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## API Reference
 
-#### Get Postcode list
+#### Get products collection
 
 ```http
-  GET /api.postcodes.io/postcodes/${payload}
+  GET https://localhost:5001/api/product
 ```
 
 | Parameter  | Type     | Description                    |
 | :--------- | :------- | :----------------------------- |
-| `postCode` | `string` | **Required**. Name Of postcode |
+| `` | `` | **Required**. get the product details |
 
-#### Get Postcode Details
+#### Get Search  result
 
 ```http
-  GET /api.postcodes.io/postcodes/${payload}/autocomplete?limit=100
+  GET https://localhost:5001/api/product/serachproducts/${payload}
 ```
 
-| Parameter     | Type     | Description                                   |
-| :------------ | :------- | :-------------------------------------------- |
-| `SearchValue` | `string` | **Required**. partial postcode value to fetch |
+| Parameter     | Type  | Description                                   :-------------------------------------------- |
+| `SearchValue` | `string` | **Required**. get product collection 
+
+#### Get filter  result
+
+```http
+  GET https://localhost:5001/api/product/orderbyproducts/${payload}
+```
+
+| Parameter     | Type  | Description                                   :-------------------------------------------- |
+| `filterValue` | `string` | **Required**. get product collection 

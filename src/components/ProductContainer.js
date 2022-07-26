@@ -1,126 +1,135 @@
 import * as utility from "../configuration";
 
 import {
-  fetchPostCodeAction,
-  fetchPostCodeListAction,
-} from "../redux/slices/postCodeSlices";
+  fetchProductAction,
+  sortProductAction,
+  searchProductAction,
+} from "../redux/slices/productSlices";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import ProductCard from './ProductRow';
-import CartModal from './CartModal'
+import ProductCard from "./ProductRow";
+import CartModal from "./CartModal";
 
-import { Image, Grid, Divider } from 'semantic-ui-react';
-import { Menu, Icon, Segment, Input, Modal, Label } from 'semantic-ui-react'
-
-import { Button } from 'semantic-ui-react'
-
-import styled from "styled-components";
+import {
+  Grid,
+  Divider,
+  Icon,
+  Modal,
+  Label,
+  Dropdown,
+  Button,
+  GridRow,
+} from "semantic-ui-react";
 
 function ProductContainer(props) {
   //select state from store
   const state = useSelector((state) => state);
 
   //set initial state
-  const { postCodeDetails, loading, error } = state;
+  const { productCollections, loading, error } = state;
   const [productDetails, setProductDetails] = useState([]);
   const [addToCart, setAddToCart] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState([]);
-  
+
+  const dropDownValues = [
+    { value: "1", text: "Product (A to Z)" },
+    { value: "2", text: "Product (Z to A)" },
+    { value: "3", text: "Price (low to high)" },
+    { value: "4", text: "Price (high to low)" },
+  ];
+  const [selectddValues, setSelectddValues] = useState("1");
 
   //Dispatch action
   const dispatch = useDispatch();
 
-  //Fetch postcode details and set location area
+  //Fetch product details
   useEffect(() => {
-    dispatch(fetchPostCodeAction());
-  }, [dispatch, fetchPostCodeAction]);
+    dispatch(fetchProductAction());
+  }, [dispatch, fetchProductAction]);
 
   useEffect(() => {
-    setProductDetails(postCodeDetails);
-  }, [postCodeDetails]);
-
-  //Get the result from the api and set the result in the callback function
-  // const callbackFunction = (data) => {
-  //   const postCodeData = data?.payload.result;
-  //   let postCodeList = postCodeData?.map((key) => ({
-  //     label: key,
-  //     value: key,
-  //   }));
-  //   setListOfCity(postCodeList);
-  // };
-
-  //Handel postcode value from searchbar and Fetch result from PostcodeList API
-  const handleInputChange = (newValue) => {
-
-  };
+    setProductDetails(productCollections);
+  }, [productCollections]);
 
   const AddToCart = (id) => {
-    setAddToCart( addToCart+ 1);
+    setAddToCart(addToCart + 1);
     setSelectedProduct([...selectedProduct, id]);
+  };
+  const RemoveToCart = (id) => {
+    setAddToCart(addToCart - 1);
 
-    console.log('selectedProduct-- ', selectedProduct);
-}
-const RemoveToCart = (id) => {
-  setAddToCart(addToCart - 1)
+    setSelectedProduct((current) =>
+      current.filter((productitem) => {
+        // 👇️ remove object that has id equal to 2
+        return productitem.id !== id.id;
+      })
+    );
+  };
 
-  setSelectedProduct(current =>
-    current.filter(productitem => {
-      // 👇️ remove object that has id equal to 2
-      return productitem.id !== id.id;
-    }),
-  );
-  console.log('selectedProduct 5 ', selectedProduct);
-
-}
-
-
-
-const iconDisplay = () => {
-  return (
-          <Label color='green' >
-                    <Icon name='shopping cart' size='big'/>
-                    {addToCart}
-                </Label>
-  )
-}
-
-const productDetail = () => {
+  const iconDisplay = () => {
     return (
-      <Button content='View Product' primary />
-    )
-}
-  
+      <Label color="green">
+        <Icon name="shopping cart" size="big" />
+        {addToCart}
+      </Label>
+    );
+  };
+
+  const productDetail = () => {
+    return <Button content="View Product" primary />;
+  };
+
+  const handleDropDownSelect = (event, data) => {
+    setSelectddValues(data.value);
+    dispatch(sortProductAction(selectddValues));
+  };
+
+  const handleSearchChange = (event, data) => {
+    dispatch(searchProductAction(event));
+  };
 
   return (
     <div>
-              
-
-                <Modal trigger={iconDisplay()} className='cart-model' closeIcon>
-                        <CartModal cart={selectedProduct} emptyCart={props.emptyCart}/>
-                </Modal>
-
-                <select class="ui dropdown">
-  <option value="">Gender</option>
-  <option value="1">Male</option>
-  <option value="0">Female</option>
-</select>
+      <div className="header--wrapar">
+        <div className="product--search">
+          <input
+            width="100%"
+            type="search"
+            placeholder="Search product by name , size  and  color..."
+            onChange={(e) => {
+              handleSearchChange(e.target.value);
+            }}
+          />
+        </div>
+        <div className="product--filter">
+          <label>filter</label>
+          <Dropdown
+            className="ui primary"
+            onChange={handleDropDownSelect}
+            options={dropDownValues}
+            value={selectddValues}
+          />
+        </div>
+        <div className="product--cart">
+          <Modal trigger={iconDisplay()} className="cart-model" closeIcon>
+            <CartModal cart={selectedProduct} emptyCart={props.emptyCart} />
+          </Modal>
+        </div>
+      </div>
 
       <Divider horizontal>Shop All Proudcts</Divider>
-            <Grid stackable columns='equal' centered>
-                { postCodeDetails !== undefined &&
-                  postCodeDetails.map(product => <Grid.Column width={4} key={product.id}>
-                    <ProductCard 
-                      product={product}
-                      onAddToCart={AddToCart}
-                      onRemoveToCart={RemoveToCart}
-                     />
-                  </Grid.Column>)
-                  }
-                
-            </Grid>
-
-            
-    
+      <Grid stackable columns="equal" centered>
+        {productCollections !== undefined &&
+          productCollections.map((product) => (
+            <Grid.Column width={4} key={product.id}>
+              <ProductCard
+                product={product}
+                onAddToCart={AddToCart}
+                onRemoveToCart={RemoveToCart}
+              />
+            </Grid.Column>
+          ))}
+      </Grid>
     </div>
   );
 }

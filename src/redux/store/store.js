@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postCodeReducer from "../slices/postCodeSlices";
+import productSlices from "../slices/productSlices";
 const store = configureStore({
-  reducer: postCodeReducer,
+  reducer: productSlices,
 });
 export default store;
